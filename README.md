@@ -44,7 +44,7 @@ agent = CCVGAE_agent(
     num_subgraphs_per_epoch=10, # Number of subgraphs per epoch
     lr=1e-4,
     w_recon=1.0,             # Weight for reconstruction loss
-    w_irecon=1.0,            # Weight for intermediate reconstruction loss
+    w_irecon=1.0,            # Weight for coupling reconstruction loss
     w_kl=1.0,                # Weight for KL divergence loss
 )
 
