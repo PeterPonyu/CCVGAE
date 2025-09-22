@@ -1,4 +1,4 @@
-from .CGVAE_env import CGVAE_env
+from .CCVGAE_env import CCVGAE_env
 from anndata import AnnData
 import numpy as np
 import pandas as pd
@@ -10,7 +10,7 @@ import psutil
 from torch_geometric.data import Data
 
 
-class CGVAE_agent_base:
+class CCVGAE_agent_base:
     """Base class for CGVAE agents, providing common fitting and utility methods."""
 
     def __init__(self, *,
@@ -75,7 +75,7 @@ class CGVAE_agent_base:
         return self
 
 
-class CGVAE_agent(CGVAE_agent_base, CGVAE_env):
+class CCVGAE_agent(CCVGAE_agent_base, CCVGAE_env):
     """
     CGVAE agent that uses subgraph sampling.
     """

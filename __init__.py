@@ -1,5 +1,5 @@
-from .CGVAE_agent import CGVAE_agent
+from .CCVGAE_agent import CCVGAE_agent
 
-__all__ = [CGVAE_agent]
+__all__ = [CCVGAE_agent]
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
