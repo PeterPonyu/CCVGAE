@@ -1,0 +1,9 @@
+torch
+torch_geometric
+numpy
+scanpy
+anndata
+scikit-learn
+psutil
+tqdm
+scvi-tools
