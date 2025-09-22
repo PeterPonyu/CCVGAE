@@ -36,7 +36,7 @@ from .CCVGAE_module import (
     BaseLinearModel,
     LinearDecoder,
 )
-from utils import GraphStructureDecoder
+from .utils import GraphStructureDecoder
 
 class GraphEncoder(BaseGraphNetwork):
     """

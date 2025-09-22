@@ -1,7 +1,6 @@
 import torch  
 import torch.nn as nn  
-from typing import Tuple, Union, Optional  
-from torch_sparse import SparseTensor  
+from typing import Tuple, Optional  
 import numpy as np  
 
 class AdjToEdge:  
