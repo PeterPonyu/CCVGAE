@@ -171,7 +171,10 @@ class envMixin:
         np.ndarray  
             Cluster labels for each sample.  
         """  
-        labels = KMeans(latent.shape[1]).fit_predict(latent)  
+        # Use the number of unique ground truth labels to determine n_clusters
+        # This ensures consistency with the evaluation metric
+        n_clusters = len(np.unique(self.labels))
+        labels = KMeans(n_clusters=n_clusters).fit_predict(latent)  
         return labels  
 
     def _calc_corr(  
@@ -335,15 +338,24 @@ class scMixin:
         try:  
             # Batch effect correction if specified  
             if batch_tech == 'harmony':  
+                # Check if batch column exists
+                if 'batch' not in adata.obs.columns:
+                    raise ValueError(
+                        "Batch correction with 'harmony' requires a 'batch' column in adata.obs. "
+                        "Please add batch information to adata.obs['batch'] before using batch correction."
+                    )
                 import scanpy.external as sce  
                 # Use Harmony integration  
                 sce.pp.harmony_integrate(adata, key='batch', basis=f'X_{tech}', adjusted_basis=f'X_harmony_{tech}')  
                 print('Applied Harmony integration for batch correction.')  
             
             elif batch_tech == 'scvi':  
+                # Check if batch column exists
+                if 'batch' not in adata.obs.columns:
+                    print("Warning: No 'batch' column found in adata.obs. Running scVI without batch information.")
                 import scvi  
                 # Use original X for scVI  
-                scvi.model.SCVI.setup_anndata(adata, layer=layer)  
+                scvi.model.SCVI.setup_anndata(adata, layer=layer, batch_key='batch' if 'batch' in adata.obs.columns else None)  
                 model = scvi.model.SCVI(adata)
                 model.train()  
                 latent = model.get_latent_representation()  

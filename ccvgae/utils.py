@@ -35,10 +35,27 @@ class AdjToEdge:
         adj: np.ndarray,  
         k: int  
     ) -> np.ndarray:  
-        """Keep top-k edges per node."""  
+        """Keep top-k edges per node.
+        
+        Parameters
+        ----------
+        adj : np.ndarray
+            Adjacency matrix
+        k : int
+            Number of top edges to keep per node
+            
+        Returns
+        -------
+        np.ndarray
+            Sparsified adjacency matrix
+        """  
         sparse_adj = np.zeros_like(adj)  
         for i in range(adj.shape[0]):  
-            top_k_idx = np.argpartition(adj[i], -k)[-k:]  
+            # Ensure k doesn't exceed the number of available edges
+            actual_k = min(k, adj.shape[1])
+            if actual_k == 0:
+                continue
+            top_k_idx = np.argpartition(adj[i], -actual_k)[-actual_k:]  
             mask = adj[i, top_k_idx] > self.threshold  
             sparse_adj[i, top_k_idx] = adj[i, top_k_idx] * mask  
         return sparse_adj  
@@ -50,7 +67,8 @@ class AdjToEdge:
     ) -> Tuple[np.ndarray, np.ndarray]:  
         """Make edges symmetric by averaging weights of bidirectional edges."""  
         if edge_index.size == 0 or edge_weight.size == 0:  
-            return np.zeros((2, 0), dtype=np.int64), np.array([], dtype=edge_weight.dtype)
+            # Return empty arrays with proper dtypes
+            return np.zeros((2, 0), dtype=np.int64), np.array([], dtype=np.float64)
         n = max(edge_index[0].max(), edge_index[1].max()) + 1  
         adj = np.zeros((n, n))  
         adj[edge_index[0], edge_index[1]] = edge_weight  
