@@ -355,8 +355,11 @@ class scMixin:
                 if not has_batch:
                     print("Warning: No 'batch' column found in adata.obs. Running scVI without batch information.")
                 import scvi  
-                # Use original X for scVI  
-                scvi.model.SCVI.setup_anndata(adata, layer=layer, batch_key='batch' if has_batch else None)  
+                # Use original X for scVI with conditional batch_key parameter
+                setup_kwargs = {'layer': layer}
+                if has_batch:
+                    setup_kwargs['batch_key'] = 'batch'
+                scvi.model.SCVI.setup_anndata(adata, **setup_kwargs)  
                 model = scvi.model.SCVI(adata)
                 model.train()  
                 latent = model.get_latent_representation()  
