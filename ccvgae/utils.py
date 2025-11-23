@@ -67,8 +67,7 @@ class AdjToEdge:
     ) -> Tuple[np.ndarray, np.ndarray]:  
         """Make edges symmetric by averaging weights of bidirectional edges."""  
         if edge_index.size == 0 or edge_weight.size == 0:  
-            # Return empty arrays with proper dtypes
-            # Preserve the original dtype even for empty arrays
+            # Return empty arrays preserving original dtypes
             return np.zeros((2, 0), dtype=np.int64), np.array([], dtype=edge_weight.dtype)
         n = max(edge_index[0].max(), edge_index[1].max()) + 1  
         adj = np.zeros((n, n))  

@@ -173,7 +173,11 @@ class envMixin:
         """  
         # Use the number of unique ground truth labels to determine n_clusters
         # This ensures consistency with the evaluation metric
-        n_clusters = len(np.unique(self.labels))
+        if not hasattr(self, 'labels') or self.labels is None:
+            # Fallback: use latent dimension if labels not initialized
+            n_clusters = latent.shape[1]
+        else:
+            n_clusters = len(np.unique(self.labels))
         labels = KMeans(n_clusters=n_clusters).fit_predict(latent)  
         return labels  
 
