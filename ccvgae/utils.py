@@ -68,8 +68,8 @@ class AdjToEdge:
         """Make edges symmetric by averaging weights of bidirectional edges."""  
         if edge_index.size == 0 or edge_weight.size == 0:  
             # Return empty arrays with proper dtypes
-            # Preserve the original dtype or use float64 as default
-            weight_dtype = edge_weight.dtype if edge_weight.size > 0 else np.float64
+            # Preserve the original dtype even for empty arrays
+            weight_dtype = edge_weight.dtype if hasattr(edge_weight, 'dtype') else np.float64
             return np.zeros((2, 0), dtype=np.int64), np.array([], dtype=weight_dtype)
         n = max(edge_index[0].max(), edge_index[1].max()) + 1  
         adj = np.zeros((n, n))  
