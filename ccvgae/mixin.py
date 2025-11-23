@@ -336,10 +336,12 @@ class scMixin:
             Layer of the AnnData object to use for scVI.  
         """  
         try:  
+            # Check if batch column exists
+            has_batch = 'batch' in adata.obs.columns
+            
             # Batch effect correction if specified  
             if batch_tech == 'harmony':  
-                # Check if batch column exists
-                if 'batch' not in adata.obs.columns:
+                if not has_batch:
                     raise ValueError(
                         "Batch correction with 'harmony' requires a 'batch' column in adata.obs. "
                         "Please add batch information to adata.obs['batch'] before using batch correction."
@@ -350,12 +352,11 @@ class scMixin:
                 print('Applied Harmony integration for batch correction.')  
             
             elif batch_tech == 'scvi':  
-                # Check if batch column exists
-                if 'batch' not in adata.obs.columns:
+                if not has_batch:
                     print("Warning: No 'batch' column found in adata.obs. Running scVI without batch information.")
                 import scvi  
                 # Use original X for scVI  
-                scvi.model.SCVI.setup_anndata(adata, layer=layer, batch_key='batch' if 'batch' in adata.obs.columns else None)  
+                scvi.model.SCVI.setup_anndata(adata, layer=layer, batch_key='batch' if has_batch else None)  
                 model = scvi.model.SCVI(adata)
                 model.train()  
                 latent = model.get_latent_representation()  
