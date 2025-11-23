@@ -171,7 +171,14 @@ class envMixin:
         np.ndarray  
             Cluster labels for each sample.  
         """  
-        labels = KMeans(latent.shape[1]).fit_predict(latent)  
+        # Use the number of unique ground truth labels to determine n_clusters
+        # This ensures consistency with the evaluation metric
+        if not hasattr(self, 'labels') or self.labels is None:
+            # Fallback: use latent dimension if labels not initialized
+            n_clusters = latent.shape[1]
+        else:
+            n_clusters = len(np.unique(self.labels))
+        labels = KMeans(n_clusters=n_clusters).fit_predict(latent)  
         return labels  
 
     def _calc_corr(  
@@ -333,17 +340,30 @@ class scMixin:
             Layer of the AnnData object to use for scVI.  
         """  
         try:  
+            # Check if batch column exists
+            has_batch = 'batch' in adata.obs.columns
+            
             # Batch effect correction if specified  
             if batch_tech == 'harmony':  
+                if not has_batch:
+                    raise ValueError(
+                        "Batch correction with 'harmony' requires a 'batch' column in adata.obs. "
+                        "Please add batch information to adata.obs['batch'] before using batch correction."
+                    )
                 import scanpy.external as sce  
                 # Use Harmony integration  
                 sce.pp.harmony_integrate(adata, key='batch', basis=f'X_{tech}', adjusted_basis=f'X_harmony_{tech}')  
                 print('Applied Harmony integration for batch correction.')  
             
             elif batch_tech == 'scvi':  
+                if not has_batch:
+                    print("Warning: No 'batch' column found in adata.obs. Running scVI without batch information.")
                 import scvi  
-                # Use original X for scVI  
-                scvi.model.SCVI.setup_anndata(adata, layer=layer)  
+                # Use original X for scVI with conditional batch_key parameter
+                setup_kwargs = {'layer': layer}
+                if has_batch:
+                    setup_kwargs['batch_key'] = 'batch'
+                scvi.model.SCVI.setup_anndata(adata, **setup_kwargs)  
                 model = scvi.model.SCVI(adata)
                 model.train()  
                 latent = model.get_latent_representation()  
