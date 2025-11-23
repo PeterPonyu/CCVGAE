@@ -353,9 +353,20 @@ sc.tl.dpt(adata)
 
 If you use CCVGAE in your research, please cite:
 
+```bibtex
+@article{ccvgae2024,
+  title={CCVGAE: A Centroid-based Coupled Variational Graph Autoencoder for Single-cell Multi-omics Data Integration},
+  author={[Authors to be filled]},
+  journal={[Journal to be filled]},
+  year={2024},
+  note={GitHub: https://github.com/PeterPonyu/CCVGAE}
+}
 ```
-CCVGAE: A Centroid-based Coupled Variational Graph Autoencoder for 
-Single-cell Multi-omics Data Integration
+
+Or in text format:
+```
+[Authors]. (2024). CCVGAE: A Centroid-based Coupled Variational Graph Autoencoder 
+for Single-cell Multi-omics Data Integration. [Journal]. GitHub: https://github.com/PeterPonyu/CCVGAE
 ```
 
 ## License
