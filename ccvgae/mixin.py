@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.cluster import KMeans  
 from sklearn.metrics import (  
     normalized_mutual_info_score,  
-    adjusted_mutual_info_score,  
+    adjusted_rand_score,  
     silhouette_score,  
     davies_bouldin_score,  
     calinski_harabasz_score,  
@@ -228,7 +228,7 @@ class envMixin:
             - P_C: Average pairwise correlation.  
         """  
         # true_labels = self.labels[self.idx]
-        ARI = adjusted_mutual_info_score(self.labels, labels)  
+        ARI = adjusted_rand_score(self.labels, labels)  
         NMI = normalized_mutual_info_score(self.labels, labels)  
         ASW = silhouette_score(latent, labels)  
         C_H = calinski_harabasz_score(latent, labels)  
