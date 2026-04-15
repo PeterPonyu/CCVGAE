@@ -42,18 +42,12 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-Here is a basic example of how to use CCVGAE to analyze single-cell data:
-
 ```python
 import scanpy as sc
 from ccvgae import CCVGAE_agent
 
-# Load your single-cell data
 adata = sc.read_h5ad("your_data.h5ad")
 
-# Initialize and train the CCVGAE model
-# The agent will automatically preprocess the data, build the graph,
-# and train the model.
 agent = CCVGAE_agent(
     adata=adata,
     layer='counts',          # Use the 'counts' layer for training
@@ -71,16 +65,10 @@ agent = CCVGAE_agent(
 # Train the model
 agent.fit(epochs=300, update_steps=10)
 
-# Extract the latent representations for downstream analysis
 latent_representation = agent.get_latent()
 
-# You can now use the latent representation for clustering, visualization, etc.
-# For example, to perform clustering:
 from sklearn.cluster import KMeans
-kmeans = KMeans(n_clusters=10)
-clusters = kmeans.fit_predict(latent_representation)
-
-# Add the clusters to your anndata object
+clusters = KMeans(n_clusters=10).fit_predict(latent_representation)
 adata.obs['ccvgae_clusters'] = clusters
 ```
 
@@ -354,19 +342,12 @@ sc.tl.dpt(adata)
 If you use CCVGAE in your research, please cite:
 
 ```bibtex
-@article{ccvgae2024,
-  title={CCVGAE: A Centroid-based Coupled Variational Graph Autoencoder for Single-cell Multi-omics Data Integration},
-  author={[Authors to be filled]},
-  journal={[Journal to be filled]},
-  year={2024},
-  note={GitHub: https://github.com/PeterPonyu/CCVGAE}
+@software{ccvgae,
+  title  = {CCVGAE: Centroid-based Coupled Variational Graph Autoencoder for Single-Cell Multi-omics Data Integration},
+  author = {Fu, Zeyu},
+  year   = {2024},
+  url    = {https://github.com/PeterPonyu/CCVGAE}
 }
-```
-
-Or in text format:
-```
-[Authors]. (2024). CCVGAE: A Centroid-based Coupled Variational Graph Autoencoder 
-for Single-cell Multi-omics Data Integration. [Journal]. GitHub: https://github.com/PeterPonyu/CCVGAE
 ```
 
 ## License
