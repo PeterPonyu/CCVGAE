@@ -1,3 +1,9 @@
+<div align="center">
+  <a href="https://peterponyu.github.io/">
+    <img src="https://peterponyu.github.io/assets/badges/CCVGAE.svg" width="64" alt="ZF Lab · CCVGAE">
+  </a>
+</div>
+
 # CCVGAE: Centroid-based Coupled Variational Graph Autoencoder
 
 CCVGAE is a deep learning framework designed for stable and interpretable analysis of single-cell multi-omics data. It addresses key challenges in variational autoencoders through three core innovations: Centroid Inference, Coupling mechanisms, and Graph neural networks.
