@@ -6,12 +6,12 @@
 
 # CCVGAE: Centroid-based Coupled Variational Graph Autoencoder
 
-CCVGAE is a deep learning framework designed for stable and interpretable analysis of single-cell multi-omics data. It addresses key challenges in variational autoencoders through three core innovations: Centroid Inference, Coupling mechanisms, and Graph neural networks.
+CCVGAE is a deep learning framework for stable and interpretable analysis of single-cell multi-omics data. It combines centroid-based latent summaries, coupling losses, and graph neural network components in a variational autoencoder workflow.
 
 ## Key Features
 
-- **Centroid Inference**: Uses deterministic posterior means as stable cell embeddings, improving reproducibility and geometric integrity.
-- **Coupling Mechanism**: Regularizes latent space through intermediate representations for enhanced stability.
+- **Centroid Inference**: Uses deterministic posterior means as stable cell embeddings.
+- **Coupling Mechanism**: Regularizes latent space through intermediate representations.
 - **Graph Neural Networks**: Leverages cell-cell similarity relationships with attention mechanisms.
 - **Scalable Architecture**: Supports subgraph sampling for large-scale datasets.
 - **Flexible Design**: Compatible with multiple encoder/decoder architectures and graph convolution types.
