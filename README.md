@@ -345,16 +345,23 @@ sc.tl.dpt(adata)
 
 ## Citation
 
-If you use CCVGAE in your research, please cite:
+If you use CCVGAE, please cite the article:
+
+> Fu Z, Liu Y, Wang J, Wang S. CCVGAE: A centroid-coupled variational graph attention autoencoder for stable and interpretable single-cell representation learning. *Array*. 2026;30:100808. https://doi.org/10.1016/j.array.2026.100808
 
 ```bibtex
-@software{ccvgae,
-  title  = {CCVGAE: Centroid-based Coupled Variational Graph Autoencoder for Single-Cell Multi-omics Data Integration},
-  author = {Fu, Zeyu},
-  year   = {2024},
-  url    = {https://github.com/PeterPonyu/CCVGAE}
+@article{fu2026ccvgae,
+  author  = {Fu, Zeyu and Liu, Yiyao and Wang, Junping and Wang, Song},
+  title   = {CCVGAE: A centroid-coupled variational graph attention autoencoder for stable and interpretable single-cell representation learning},
+  journal = {Array},
+  volume  = {30},
+  pages   = {100808},
+  year    = {2026},
+  doi     = {10.1016/j.array.2026.100808}
 }
 ```
+
+GitHub's "Cite this repository" button reads the same record from `CITATION.cff`.
 
 ## License
 
