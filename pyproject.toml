@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccvgae"
+version = "0.3.0"
+description = "CCVGAE: centroid-coupled variational graph attention autoencoder for stable and interpretable single-cell representation learning"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Zeyu Fu"}]
+keywords = ["single-cell", "variational autoencoder", "graph neural network", "scRNA-seq", "scATAC-seq"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "torch",
+    "torch-geometric",
+    "numpy",
+    "scanpy",
+    "anndata",
+    "scikit-learn",
+    "psutil",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+scvi = ["scvi-tools"]
+harmony = ["harmonypy"]
+all = ["scvi-tools", "harmonypy"]
+
+[project.urls]
+Homepage = "https://github.com/PeterPonyu/CCVGAE"
+Repository = "https://github.com/PeterPonyu/CCVGAE"
+Paper = "https://doi.org/10.1016/j.array.2026.100808"
+
+[tool.setuptools]
+packages = ["ccvgae"]

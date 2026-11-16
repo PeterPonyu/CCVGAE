@@ -38,6 +38,14 @@ CCVGAE is a deep learning framework for stable and interpretable analysis of sin
 - psutil
 - tqdm
 
+### Install from PyPI
+
+```bash
+pip install ccvgae
+```
+
+Batch correction with scVI or Harmony needs the optional extras: `pip install "ccvgae[scvi]"` or `pip install "ccvgae[harmony]"`.
+
 ### Install from source
 
 ```bash
