@@ -39,6 +39,7 @@ all = ["scvi-tools", "harmonypy"]
 Homepage = "https://github.com/PeterPonyu/CCVGAE"
 Repository = "https://github.com/PeterPonyu/CCVGAE"
 Paper = "https://doi.org/10.1016/j.array.2026.100808"
+Issues = "https://github.com/PeterPonyu/CCVGAE/issues"
 
 [tool.setuptools]
 packages = ["ccvgae"]

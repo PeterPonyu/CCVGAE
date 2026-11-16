@@ -4,7 +4,10 @@
   </a>
 </div>
 
-# CCVGAE: Centroid-based Coupled Variational Graph Autoencoder
+# CCVGAE: Centroid-Coupled Variational Graph Attention Autoencoder
+
+[![PyPI](https://img.shields.io/pypi/v/ccvgae.svg)](https://pypi.org/project/ccvgae/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24268690.svg)](https://doi.org/10.5281/zenodo.24268690)
 
 CCVGAE is a deep learning framework for stable and interpretable analysis of single-cell multi-omics data. It combines centroid-based latent summaries, coupling losses, and graph neural network components in a variational autoencoder workflow.
 
@@ -28,8 +31,8 @@ CCVGAE is a deep learning framework for stable and interpretable analysis of sin
 ## Installation
 
 ### Requirements
-- Python >= 3.7
-- PyTorch >= 1.8.0
+- Python >= 3.9
+- PyTorch
 - PyTorch Geometric
 - scanpy
 - anndata
@@ -51,7 +54,7 @@ Batch correction with scVI or Harmony needs the optional extras: `pip install "c
 ```bash
 git clone https://github.com/PeterPonyu/CCVGAE
 cd CCVGAE
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Quick Start
